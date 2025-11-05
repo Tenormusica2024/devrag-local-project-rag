@@ -19,19 +19,19 @@ Claude Code向けのローカルRAG（Retrieval-Augmented Generation）システ
 ✅ **トークン消費削減**: 従来比40倍のトークン削減効果（580,000 → 2,500トークン）  
 ✅ **自動インデックス**: MCP統合により自動的にドキュメントをインデックス化  
 ✅ **多言語対応**: multilingual-e5-smallモデルによる日本語・英語対応  
-✅ **高速検索**: 平均0.1〜0.3秒でセマンティック検索結果を返却
+
+⚠️ **注意**: 検索機能は現在修正中です。multilingual-e5-smallモデルのセットアップが必要です。
 
 ## 📊 システム統計
 
 | 項目 | 値 |
 |------|-----|
-| 総マークダウンファイル数 | 116件 |
+| 総マークダウンファイル数 | 128件 |
 | GitHubプロジェクトドキュメント | 29件 |
 | 総チャンク数 | 458個 |
 | ベクトルDB総サイズ | 2.3MB |
-| 埋め込みモデルサイズ | 448MB |
+| 埋め込みモデルサイズ | 448MB（要手動セットアップ） |
 | ベクトル次元数 | 384次元 |
-| 平均検索速度 | 0.1〜0.3秒 |
 
 ## 🚀 クイックスタート
 
@@ -74,8 +74,13 @@ C:\Users\[YourUsername]\devrag-windows-x64.exe index
 
 初回実行時の動作:
 - `config.json` が自動生成される
-- multilingual-e5-smallモデル（448MB）が自動ダウンロードされる
 - documentsディレクトリ内の全マークダウンファイルがインデックス化される
+
+⚠️ **重要**: multilingual-e5-smallモデル（448MB）の自動ダウンロードに失敗する場合があります。その場合は以下の手順で手動セットアップが必要です:
+
+1. Hugging Faceから手動ダウンロード: https://huggingface.co/intfloat/multilingual-e5-small
+2. `models/multilingual-e5-small/` ディレクトリに `model.onnx` を配置
+3. `model.onnx` の存在を確認してから再度インデックス実行
 
 #### 4. Claude Code MCP設定
 
